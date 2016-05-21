@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace AuthCe.Domain
 {
-    public class Bank
+    public abstract class Card
     {
+        private ulong CardId;
+        private Bank IssuedBy;
 
+        private abstract Card(ulong id, Bank bank);
     }
 }

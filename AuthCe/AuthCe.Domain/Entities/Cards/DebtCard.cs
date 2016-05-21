@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthCe.Domain
+namespace AuthCe.Domain.Entities.Cards
 {
-    public abstract class PrivateClient
+    public class DebtCard : Card
     {
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthCe.Domain
+namespace AuthCe.Domain.Entities.Cards
 {
-    class Transaction
+    public class CreditCard : Card
     {
+
     }
 }
