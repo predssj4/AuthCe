@@ -10,14 +10,19 @@ namespace AuthCe.Domain
     {
         private ulong TransactionId;
         private double Amount;
-        private Company ReciverOfAmount;
-        private Card UsedCard;
+        private string ReciverOfAmount;
+        private ulong UsedCard;
         private DateTime DateTime;
-        private string currency;
+        private string Currency;
 
-        public Transaction createTransaction()
+        public Transaction (double amount, string reciver, ulong cardId, string currency)
         {
-            return new Transaction();
+            this.Amount = amount;
+            this.ReciverOfAmount = reciver;
+            this.UsedCard = cardId;
+            this.DateTime = DateTime.Now;
+            this.Currency = currency;
+
         }
     }
 }

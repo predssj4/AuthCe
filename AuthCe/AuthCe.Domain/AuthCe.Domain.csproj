@@ -43,6 +43,9 @@
     <Compile Include="Entities\AuthorizationCentre.cs" />
     <Compile Include="Entities\Bank.cs" />
     <Compile Include="Entities\Card.cs" />
+    <Compile Include="Entities\Cards\CashCard.cs" />
+    <Compile Include="Entities\Cards\CreditCard.cs" />
+    <Compile Include="Entities\Cards\DebtCard.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\PrivateClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

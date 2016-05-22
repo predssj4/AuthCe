@@ -32,5 +32,12 @@ namespace AuthCe.Domain.DataAccessLayer
         {
 
         }
+
+        //public AuthorizationCentre AuthCentreContentProvider(string shop)
+        //{
+        //    //shop bedzie informowal o tym z jakiego centrum skorzystac przy wyborze jakiego sklepu
+
+        //    throw new NotImplementedException();
+        //}
     }
 }

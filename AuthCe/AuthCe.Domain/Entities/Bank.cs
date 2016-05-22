@@ -17,7 +17,10 @@ namespace AuthCe.Domain
             return true;
         }
 
-        Bank(string name);
+        Bank(string name)
+        {
+            this.Name = name;
+        }
 
         public bool IssueANewCard()
         {

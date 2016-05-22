@@ -8,5 +8,6 @@ namespace AuthCe.Domain.Entities.Cards
 {
     public class DebtCard : Card
     {
+
     }
 }

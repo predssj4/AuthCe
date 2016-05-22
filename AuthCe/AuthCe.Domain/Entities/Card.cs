@@ -11,6 +11,5 @@ namespace AuthCe.Domain
         private ulong CardId;
         private Bank IssuedBy;
 
-        private abstract Card(ulong id, Bank bank);
     }
 }

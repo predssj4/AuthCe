@@ -1,1 +1,15 @@
 D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\bin\Debug\AuthCe.UI.exe.config
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI.csprojResolveAssemblyReference.cache
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\MainWindow.baml
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\MainWindow.g.cs
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\App.g.cs
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI_MarkupCompile.cache
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI.g.resources
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI.Properties.Resources.resources
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI.csproj.GenerateResource.Cache
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\bin\Debug\AuthCe.UI.exe
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\bin\Debug\AuthCe.UI.pdb
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\bin\Debug\AuthCe.Domain.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\bin\Debug\AuthCe.Domain.pdb
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI.exe
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.UI\obj\Debug\AuthCe.UI.pdb

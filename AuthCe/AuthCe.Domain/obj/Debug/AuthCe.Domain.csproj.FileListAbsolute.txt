@@ -1,0 +1,5 @@
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Domain\obj\Debug\AuthCe.Domain.csprojResolveAssemblyReference.cache
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Domain\bin\Debug\AuthCe.Domain.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Domain\bin\Debug\AuthCe.Domain.pdb
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Domain\obj\Debug\AuthCe.Domain.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Domain\obj\Debug\AuthCe.Domain.pdb

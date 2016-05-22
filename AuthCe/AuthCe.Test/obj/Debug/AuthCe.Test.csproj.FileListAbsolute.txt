@@ -1,0 +1,11 @@
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\AuthCe.Test.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\AuthCe.Test.pdb
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\AuthCe.Domain.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\Moq.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\nunit.framework.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\AuthCe.Domain.pdb
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\Moq.xml
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\bin\Debug\nunit.framework.xml
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\obj\Debug\AuthCe.Test.csprojResolveAssemblyReference.cache
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\obj\Debug\AuthCe.Test.dll
+D:\Programowanie\uczelnia projekty\semestr 2\Project\AuthCe\AuthCe.Test\obj\Debug\AuthCe.Test.pdb
