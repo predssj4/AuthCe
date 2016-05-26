@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AuthCe.Domain;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,13 @@ namespace AuthCe.Test
         public void asdf()
         {
             Assert.AreEqual(5, 10/2);
+
+        }
+
+        [Test]
+        public void AddCompany()
+        {
+ 
 
         }
     }

@@ -8,7 +8,8 @@ namespace AuthCe.Domain
 {
     public class Bank
     {
-        private string Name;
+        public string Name { get; set; }
+
         private List<PrivateClient> ClientsOfBank;
         private List<Card> IssuedCards;
 
@@ -17,9 +18,14 @@ namespace AuthCe.Domain
             return true;
         }
 
-        Bank(string name)
+        public Bank(string name)
         {
             this.Name = name;
+        }
+
+        public Bank()
+        {
+
         }
 
         public bool IssueANewCard()

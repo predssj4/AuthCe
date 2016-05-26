@@ -14,7 +14,7 @@ namespace AuthCe.Domain
 
         public bool RealizeRequest(double amount, string reciver, ulong cardId, string currency)
         {
-
+            
 
             return true;
         }

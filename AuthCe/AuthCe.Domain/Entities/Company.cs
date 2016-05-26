@@ -8,8 +8,8 @@ namespace AuthCe.Domain
 {
     public class Company
     {
-        private string Name;
-        private string CompanyType;
+        public string Name { get; set; }
+        public string CompanyType { get; set; }
 
         public Company(string name, string type)
         {
@@ -17,9 +17,19 @@ namespace AuthCe.Domain
             this.CompanyType = type;
         }
 
+        public Company()
+        {
+
+        }
+
         public bool SendConfirmationRequest(Card card)
         {
             return true;
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }

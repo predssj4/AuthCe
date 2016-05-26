@@ -9,7 +9,7 @@ namespace AuthCe.Domain
     public abstract class Card
     {
         private ulong CardId;
-        private Bank IssuedBy;
+        private string IssuedBy;
 
     }
 }

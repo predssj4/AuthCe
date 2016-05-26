@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AuthCe.Domain;
+using AuthCe.Domain.DataAccessLayer;
 
 namespace AuthCe.UI
 {
@@ -81,12 +82,71 @@ namespace AuthCe.UI
 
             AuthorizationCentre authCe = new AuthorizationCentre();
             authCe.RealizeRequest(amount, shop, id, currency);
+
+
         }
 
-        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DbMenagmentProvider db = new DbMenagmentProvider();
+            db.AddCompany(new Company("firma4", "spozywczak"));
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            DbMenagmentProvider db = new DbMenagmentProvider();
+            db.RemoveCompany(new Company("firma1", "spozywczak"));
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            DbMenagmentProvider db = new DbMenagmentProvider();
+            db.AddBank(new Bank("bank1"));
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            DbMenagmentProvider db = new DbMenagmentProvider();
+            db.RemoveBank(new Bank("bank1"));
+        }
+
+        private void AddValueToComboBox_Click(object sender, RoutedEventArgs e)
         {
 
+            DbMenagmentProvider db = new DbMenagmentProvider();
+            List<Company> list = db.ProvideListWithCompanies();
+
+
+
+            ListboxExample.ItemsSource = list;
+
+            //MessageBox.Show(list[0].ToString());
+
+            //item2.Content = list[0].ToString();
+
+            //ListboxExample.Items.Add(item2);
+
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    item2.Content = list[i].ToString();
+            //    ListboxExample.Items.Add(item2);
+
+            //}
+
+            //foreach (var item in list)
+            //{
+            //    item2.Content = item.ToString();
+            //    ListboxExample.Items.Add(item2);
+            //}
+
+            //ListBoxItem item1 = new ListBoxItem();
+            //item1.Content = "nowa firma";
+
+            //ListboxExample.Items.Add(item1);
         }
+
+
+
 
     }
 }

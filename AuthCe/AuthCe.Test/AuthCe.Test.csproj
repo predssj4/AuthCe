@@ -78,6 +78,7 @@
     <Compile Include="DbMenagmentProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest2.cs" />
+    <Compile Include="XDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuthCe.Domain\AuthCe.Domain.csproj">
