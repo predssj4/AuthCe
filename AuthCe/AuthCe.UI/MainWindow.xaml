@@ -42,7 +42,7 @@
                     </ComboBox>
                     <Label Content="Wybierz miejsce zakupów" HorizontalAlignment="Left" Height="36" Margin="12,137,0,0" VerticalAlignment="Top" Width="282" FontWeight="ExtraBold" BorderBrush="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontStretch="Condensed"/>
                     <ListBox x:Name="ListWithShopsListBox" HorizontalAlignment="Left" Height="164" Margin="8,173,0,0" VerticalAlignment="Top" Width="286" >
-                        <ListBoxItem>OMG</ListBoxItem>
+                        <ListBoxItem>Lidl</ListBoxItem>
                         <ListBoxItem Height="17" IsSelected="True">Shell</ListBoxItem>
                         <ListBoxItem Height="17">DHL</ListBoxItem>
                         <ListBoxItem Height="17">Biedronka</ListBoxItem>
@@ -54,24 +54,16 @@
                         <ListBoxItem Height="17">Łucznik</ListBoxItem>
                         <ListBoxItem Height="17">Transporter</ListBoxItem>
                     </ListBox>
-                    <Button Content="Wykonaj zakupy" HorizontalAlignment="Left" Margin="10,377,0,0" VerticalAlignment="Top" Width="282" Height="33" Click="Button_Click" RenderTransformOrigin="0.482,1.333"/>
+                    <Button x:Name="MakeShopping" Content="Wykonaj zakupy" HorizontalAlignment="Left" Margin="10,377,0,0" VerticalAlignment="Top" Width="282" Height="33" Click="Button_Click" RenderTransformOrigin="0.482,1.333"/>
 
 
                 </Grid>
             </TabItem>
             <TabItem Header="Centres menagment">
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="Dodaj firmę" HorizontalAlignment="Left" Margin="158,193,0,0" VerticalAlignment="Top" Width="137" Click="Button_Click_1"/>
-                    <Button x:Name="RemoveCompanyButton" Content="Usuń firmę" HorizontalAlignment="Left" Margin="158,653,0,0" VerticalAlignment="Top" Width="137" Click="Button_Click_2"/>
-                    <Button Content="Dodaj bank" HorizontalAlignment="Left" Margin="642,193,0,0" VerticalAlignment="Top" Width="157" Click="Button_Click_3"/>
-                    <Button Content="Usuń bank" HorizontalAlignment="Left" Margin="642,653,0,0" VerticalAlignment="Top" Width="157" Click="Button_Click_4"/>
-                    <ListBox x:Name="CompaniesListBox"
-                    	Background="#999"
-                    	BorderThickness="2"
-                    	BorderBrush="White"
-                    	Margin="10,268,537,217"
-                    	ItemsSource="{Binding Source={StaticResource BookmarkData}, XPath=Company}"
-                    	ItemTemplate="{StaticResource BookmarkDataTemplate}"/>
+                    <Button Content="Dodaj firmę" HorizontalAlignment="Left" Margin="158,193,0,0" VerticalAlignment="Top" Width="137" Click="AddCompany_Click"/>
+                    <Button x:Name="RemoveCompanyButton" Content="Usuń firmę" HorizontalAlignment="Left" Margin="96,433,0,0" VerticalAlignment="Top" Width="137" Click="RemoveCompany"/>
+                    <Button Content="Dodaj bank" HorizontalAlignment="Left" Margin="642,193,0,0" VerticalAlignment="Top" Width="157" Click="AddBank_Click"/>
                     <Separator HorizontalAlignment="Left" Height="15" Margin="10,253,0,0" VerticalAlignment="Top" Width="968"/>
                     <Separator HorizontalAlignment="Left" Height="16" Margin="149,335,0,0" VerticalAlignment="Top" Width="686" RenderTransformOrigin="0.5,0.5">
                         <Separator.RenderTransform>
@@ -83,7 +75,7 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
-                    <TextBox HorizontalAlignment="Left" Height="34" Margin="10,71,0,0" TextWrapping="Wrap" Text="Nazwa firmy..." VerticalAlignment="Top" Width="468"/>
+                    <TextBox x:Name="CompanyNameTextBox" HorizontalAlignment="Left" Height="34" Margin="10,71,0,0" TextWrapping="Wrap" Text="Nazwa firmy..." VerticalAlignment="Top" Width="468"/>
                     <Label Content="Wprowadź nazwę firmy która będzie obsługiwana przez  centrum autoryzacji:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.368,-0.192" Width="468" Height="49"/>
                     <Label Content="Wybierz typ firmy:&#xA;" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.368,-0.192" Width="191" Height="28"/>
                     <ComboBox x:Name="CompanyTypeComboBox" HorizontalAlignment="Left" Margin="158,133,0,0" VerticalAlignment="Top" Width="147">
@@ -93,19 +85,59 @@
                         <ComboBoxItem Content="Sprzedaż"/>
                     </ComboBox>
                     <Label Content="Wprowadź nazwę banku który będzie realizował zlecenia dostarczane przez centrm&#xD;&#xA; autoryzacji.&#xA;" HorizontalAlignment="Left" Margin="508,13,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.368,-0.192" Width="461" Height="49"/>
-                    <TextBox HorizontalAlignment="Left" Height="34" Margin="508,71,0,0" TextWrapping="Wrap" Text="Nazwa banku...." VerticalAlignment="Top" Width="461"/>
-                    <Button x:Name="AddValueToComboBox" Content="dodaj kolejny wpis" HorizontalAlignment="Left" Margin="201,519,0,0" VerticalAlignment="Top" Width="132" Click="AddValueToComboBox_Click"/>
-                    <ListBox x:Name="ListboxExample" HorizontalAlignment="Left" Height="144" Margin="637,397,0,0" VerticalAlignment="Top" Width="249"/>
+                    <TextBox x:Name="AddBankTextBox" HorizontalAlignment="Left" Height="34" Margin="508,71,0,0" TextWrapping="Wrap" Text="Nazwa banku...." VerticalAlignment="Top" Width="461"/>
+                    <Button x:Name="AddValueToComboBox" Content="Odśwież listę firm" HorizontalAlignment="Left" Margin="245,433,0,0" VerticalAlignment="Top" Width="137" Click="AddValueToComboBox_Click"/>
+                    <ListBox x:Name="CompaniesListBox" HorizontalAlignment="Left" Height="144" Margin="96,273,0,0" VerticalAlignment="Top" Width="286"/>
+                    <ListBox x:Name="BanksListBox" HorizontalAlignment="Left" Height="144" Margin="602,273,0,0" VerticalAlignment="Top" Width="286"/>
+                    <Button x:Name="RemoveBankButton" Content="Usuń bank" HorizontalAlignment="Left" Margin="602,433,0,0" VerticalAlignment="Top" Width="137" Click="RemoveBankButton_Click"/>
+                    <Button x:Name="RefreshListBoxWithBanks" Content="Odśwież listę banków" HorizontalAlignment="Left" Margin="751,433,0,0" VerticalAlignment="Top" Width="137" Click="RefreshListBoxWithBanks_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Transactions">
-                <Grid/>
+                <Grid>
+                    <Label Content="Wybierz dzień tranzakcji" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Height="36" Width="303"/>
+                    <Calendar x:Name="DayOfTransactionCalendar" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Width="188" SelectedDatesChanged="DayOfTransactionCalendar_SelectedDatesChanged"/>
+                    <Label Content="Wpisz numer karty" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="303"/>
+                    <TextBox x:Name="CardIdFilterTextBox" HorizontalAlignment="Left" Height="23" Margin="10,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303"/>
+                    <Label Content="Odbiorca" HorizontalAlignment="Left" Margin="10,296,0,0" VerticalAlignment="Top" Width="303"/>
+                    <TextBox x:Name="ReciverFilterTextBox" HorizontalAlignment="Left" Height="23" Margin="10,327,0,0" TextWrapping="Wrap" 
+                             VerticalAlignment="Top" Width="303" />
+                    <Label Content="Waluta" HorizontalAlignment="Left" Margin="10,355,0,0" VerticalAlignment="Top" Width="303"/>
+                    <ComboBox x:Name="CurrencyFilterComboBox" HorizontalAlignment="Left" Margin="144,359,0,0" VerticalAlignment="Top" Width="169" >
+                        <ComboBoxItem IsSelected="True" Content="Dowolna"/>
+                        <ComboBoxItem Content="PLN" />
+                        <ComboBoxItem Content="EURO"/>
+                        <ComboBoxItem Content="DOLLAR"/>
+                        <ComboBoxItem Content="ROUBLE"/>
+                    </ComboBox>
+                    <Label Content="Status tranzakcji" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Width="303"/>
+                    <CheckBox x:Name="StatusCheckBox" Content="Tylko zaakceptowane ?" HorizontalAlignment="Left" Margin="145,396,0,0" VerticalAlignment="Top" Width="135"/>
+                    <Label Content="Kwota tranzakcji" HorizontalAlignment="Left" Margin="10,417,0,0" VerticalAlignment="Top" Width="303"/>
+                    <Label Content="Od" HorizontalAlignment="Left" Margin="10,448,0,0" VerticalAlignment="Top" Width="135"/>
+                    <Label Content="Do" HorizontalAlignment="Left" Margin="10,476,0,0" VerticalAlignment="Top" Width="135"/>
+                    <TextBox x:Name="MinValueFilterTextBox" HorizontalAlignment="Left" Height="23" Margin="144,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+                    <TextBox x:Name="MaxValueFilterTextBox" HorizontalAlignment="Left" Height="23" Margin="144,479,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+                    <Button x:Name="SearchButton" Content="Wyszukaj" HorizontalAlignment="Left" Margin="10,507,0,0" VerticalAlignment="Top" Width="303" Click="SearchButton_Click"/>
+                    <ListView x:Name="TransactionsListView" HorizontalAlignment="Left" Height="475" Margin="369,54,0,0" VerticalAlignment="Top" Width="597">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Reciver" Width="120" DisplayMemberBinding="{Binding ReciverOfAmount}" />
+                                <GridViewColumn Header="CardID" Width="200" DisplayMemberBinding="{Binding UsedCardId}" />
+                                <GridViewColumn Header="DateTime" Width="100" DisplayMemberBinding="{Binding DateTime}" />
+                                <GridViewColumn Header="Amount" Width="100" DisplayMemberBinding="{Binding Amount}" />
+                                <GridViewColumn Header="Currency" Width="60" DisplayMemberBinding="{Binding Currency}" />
+                                <GridViewColumn Header="Status" Width="90" DisplayMemberBinding="{Binding IfAccepted}" />
+                            </GridView>
+                        </ListView.View>
+                        <ScrollBar Height="100" Width="100"/>
+                    </ListView>
+                    <Button x:Name="LoadTransactionsListButton" Content="Załaduj listę tranzakcji" HorizontalAlignment="Left" Margin="369,552,0,0" VerticalAlignment="Top" Width="597" Click="Button_Click_1"/>
+                    <CheckBox x:Name="DateFreeChoiceCheckBox" Content="Dowolna" HorizontalAlignment="Left" Margin="212,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,-0.062" Width="134" Click="DateFreeChoiceCheckBox_Click" IsChecked="True"/>
 
+                </Grid>
             </TabItem>
         </TabControl>
-        <!--<UserControl Loaded="UserControl_Loaded" Margin="10,10,-10,-10">
-            
-        </UserControl>-->
+
 
     </Grid>
 </Window>

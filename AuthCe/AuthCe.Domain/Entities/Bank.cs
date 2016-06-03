@@ -10,12 +10,19 @@ namespace AuthCe.Domain
     {
         public string Name { get; set; }
 
-        private List<PrivateClient> ClientsOfBank;
         private List<Card> IssuedCards;
 
-        public bool RealizeRequestFromAuthorizationCentre(Card card)
+        public bool RealizeRequestFromAuthorizationCentre(double amount, string cardId)
         {
-            return true;
+            Random rnd = new Random();
+
+            int propability = rnd.Next(1, 100);
+
+            if (propability <= 75)
+                return true;
+            else
+                return false;
+
         }
 
         public Bank(string name)
@@ -33,9 +40,10 @@ namespace AuthCe.Domain
             return true;
         }
 
-        public bool AddANewPrivateClient(PrivateClient privateClient)
+        public override string ToString()
         {
-            return true;
+            return this.Name;
         }
+
     }
 }

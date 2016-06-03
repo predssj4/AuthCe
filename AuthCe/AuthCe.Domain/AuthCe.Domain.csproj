@@ -48,6 +48,8 @@
     <Compile Include="Entities\Cards\DebtCard.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\PrivateClient.cs" />
+    <Compile Include="Entities\SearchFilter.cs" />
+    <Compile Include="Exceptions\DataBaseSavingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Transaction.cs" />
   </ItemGroup>

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthCe.Domain
+namespace AuthCe.Domain.Entities
 {
-    public class Card
+    public class SearchFilter
     {
-        public string CardId { get; set; }
-        public string IssuedBy { get; set; }
+
     }
 }

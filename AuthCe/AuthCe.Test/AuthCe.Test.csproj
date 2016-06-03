@@ -75,10 +75,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AuthCeTest.cs" />
     <Compile Include="DbMenagmentProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest2.cs" />
-    <Compile Include="XDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuthCe.Domain\AuthCe.Domain.csproj">
@@ -87,7 +86,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

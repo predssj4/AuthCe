@@ -8,21 +8,22 @@ namespace AuthCe.Domain
 {
     public class Transaction
     {
-        private ulong TransactionId;
-        private double Amount;
-        private string ReciverOfAmount;
-        private ulong UsedCard;
-        private DateTime DateTime;
-        private string Currency;
+        //public ulong TransactionId { get; set; }
+        public double Amount { get; set; }
+        public string ReciverOfAmount { get; set; }
+        public string UsedCardId { get; set; }
+        public string DateTime { get; set; }
+        public string Currency { get; set; }
+        public string IfAccepted { get; set; }
 
-        public Transaction (double amount, string reciver, ulong cardId, string currency)
-        {
-            this.Amount = amount;
-            this.ReciverOfAmount = reciver;
-            this.UsedCard = cardId;
-            this.DateTime = DateTime.Now;
-            this.Currency = currency;
+        //public Transaction (double amount, string reciver, ulong cardId, string currency)
+        //{
+        //    this.Amount = amount;
+        //    this.ReciverOfAmount = reciver;
+        //    this.UsedCard = cardId;
+        //    this.DateTime = DateTime.Now;
+        //    this.Currency = currency;
 
-        }
+        //}
     }
 }
