@@ -10,7 +10,20 @@ namespace AuthCe.Domain
     {
         public string Name { get; set; }
 
-        private List<Card> IssuedCards;
+        public Bank(string name)
+        {
+            this.Name = name;
+        }
+
+        public Bank()
+        {
+
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
 
         public bool RealizeRequestFromAuthorizationCentre(double amount, string cardId)
         {
@@ -22,28 +35,6 @@ namespace AuthCe.Domain
                 return true;
             else
                 return false;
-
         }
-
-        public Bank(string name)
-        {
-            this.Name = name;
-        }
-
-        public Bank()
-        {
-
-        }
-
-        public bool IssueANewCard()
-        {
-            return true;
-        }
-
-        public override string ToString()
-        {
-            return this.Name;
-        }
-
     }
 }

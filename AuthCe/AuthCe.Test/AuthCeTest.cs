@@ -34,28 +34,9 @@ namespace AuthCe.Test
                     Name = element.IssuedBy
                 };
 
-
             SelectedBank = new Bank(bankName.FirstOrDefault().Name);
 
             Assert.AreEqual(SelectedBank.Name, "pko");
-
-        }
-
-        [Test]
-        public void CheckWeatherAuthCeWorksWithBank_Test()
-        {
-
-            DbMenagmentProvider db = new DbMenagmentProvider();
-
-            //List<Bank> bankList = db.ProvideListWithBanks();
-
-            //var bank = 
-            //    from element in bankList
-            //    where element.Name == "PKO"
-
-
-            //Assert.AreEqual(answer, true);
-
         }
 
         [Test]
@@ -72,5 +53,6 @@ namespace AuthCe.Test
 
             Assert.AreEqual(newTransactionsList.Count, 2);
         }
+
     }
 }

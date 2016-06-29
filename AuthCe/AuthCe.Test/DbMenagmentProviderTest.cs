@@ -14,15 +14,8 @@ namespace AuthCe.Test
         [Test]
         public void asdf()
         {
-            Assert.AreEqual(5, 10/2);
 
         }
 
-        [Test]
-        public void AddCompany()
-        {
- 
-
-        }
     }
 }

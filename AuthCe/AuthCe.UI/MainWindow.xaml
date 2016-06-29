@@ -26,7 +26,7 @@
     <Grid>
 
         <TabControl HorizontalAlignment="Left" Height="720" Margin="10,10,0,0" VerticalAlignment="Top" Width="998">
-            <TabItem Header="Card authorization" Height="23" VerticalAlignment="Top">
+            <TabItem Header="Centrum autoryzacji" Height="23" VerticalAlignment="Top">
                 <Grid>
                     <Label Margin="10,10,868,645">Numer ID karty</Label>
                     <TextBox x:Name="CardIdTextBox" HorizontalAlignment="Left" Height="30" Margin="120,10,0,0" TextWrapping="Wrap" Text="Wpisz ID" VerticalAlignment="Top" Width="174"/>
@@ -42,7 +42,7 @@
                     </ComboBox>
                     <Label Content="Wybierz miejsce zakupów" HorizontalAlignment="Left" Height="36" Margin="12,137,0,0" VerticalAlignment="Top" Width="282" FontWeight="ExtraBold" BorderBrush="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontStretch="Condensed"/>
                     <ListBox x:Name="ListWithShopsListBox" HorizontalAlignment="Left" Height="164" Margin="8,173,0,0" VerticalAlignment="Top" Width="286" >
-                        <ListBoxItem>Lidl</ListBoxItem>
+                        <!--<ListBoxItem>Lidl</ListBoxItem>
                         <ListBoxItem Height="17" IsSelected="True">Shell</ListBoxItem>
                         <ListBoxItem Height="17">DHL</ListBoxItem>
                         <ListBoxItem Height="17">Biedronka</ListBoxItem>
@@ -52,14 +52,15 @@
                         <ListBoxItem Height="17">Gls</ListBoxItem>
                         <ListBoxItem Height="17">Orlen</ListBoxItem>
                         <ListBoxItem Height="17">Łucznik</ListBoxItem>
-                        <ListBoxItem Height="17">Transporter</ListBoxItem>
+                        <ListBoxItem Height="17">Transporter</ListBoxItem>-->
                     </ListBox>
                     <Button x:Name="MakeShopping" Content="Wykonaj zakupy" HorizontalAlignment="Left" Margin="10,377,0,0" VerticalAlignment="Top" Width="282" Height="33" Click="Button_Click" RenderTransformOrigin="0.482,1.333"/>
+                    <Button x:Name="RefreshShoppingPlacesButton" Content="Odśwież" HorizontalAlignment="Left" Margin="8,342,0,0" VerticalAlignment="Top" Width="286" Click="RefreshShoppingPlacesButton_Click"/>
 
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Centres menagment">
+            <TabItem Header="Zarządzanie">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="Dodaj firmę" HorizontalAlignment="Left" Margin="158,193,0,0" VerticalAlignment="Top" Width="137" Click="AddCompany_Click"/>
                     <Button x:Name="RemoveCompanyButton" Content="Usuń firmę" HorizontalAlignment="Left" Margin="96,433,0,0" VerticalAlignment="Top" Width="137" Click="RemoveCompany"/>
@@ -93,7 +94,7 @@
                     <Button x:Name="RefreshListBoxWithBanks" Content="Odśwież listę banków" HorizontalAlignment="Left" Margin="751,433,0,0" VerticalAlignment="Top" Width="137" Click="RefreshListBoxWithBanks_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Transactions">
+            <TabItem Header="Tranzakcje">
                 <Grid>
                     <Label Content="Wybierz dzień tranzakcji" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Height="36" Width="303"/>
                     <Calendar x:Name="DayOfTransactionCalendar" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Width="188" SelectedDatesChanged="DayOfTransactionCalendar_SelectedDatesChanged"/>
@@ -141,34 +142,3 @@
 
     </Grid>
 </Window>
-
-
-<!--<x:XData>
-                <ListaFirm xmlns="">
-                    <Company>
-                        <Name>firma2</Name>
-                        <CompanyType>spozywczak</CompanyType>
-                    </Company>
-                    <Company>
-                        <Name>firma2</Name>
-                        <CompanyType>spozywczak</CompanyType>
-                    </Company>
-                    <Company>
-                        <Name>firma2</Name>
-                        <CompanyType>spozywczak</CompanyType>
-                    </Company>
-                    <Company>
-                        <Name>firma4</Name>
-                        <CompanyType>spozywczak</CompanyType>
-                    </Company>
-                    <Company>
-                        <Name>firma4</Name>
-                        <CompanyType>spozywczak</CompanyType>
-                    </Company>
-                    <Company>
-                        <Name>firma4</Name>
-                        <CompanyType>spozywczak</CompanyType>
-                    </Company>
-                </ListaFirm>
-            
-            </x:XData>-->

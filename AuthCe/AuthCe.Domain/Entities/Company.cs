@@ -22,11 +22,6 @@ namespace AuthCe.Domain
 
         }
 
-        public bool SendConfirmationRequest(Card card)
-        {
-            return true;
-        }
-
         public override string ToString()
         {
             return this.Name;

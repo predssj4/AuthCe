@@ -29,12 +29,6 @@ namespace AuthCe.UI
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             double amount;
@@ -47,10 +41,15 @@ namespace AuthCe.UI
             {
                 amount = double.Parse(AmountTestBox.Text);
             }
-            catch
+            catch(FormatException)
             {
                 AmountTestBox.Text = "To powinna być wartość";
                 AmountTestBox.Background = Brushes.OrangeRed;
+                return;
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show(string.Format("Nieoczekiwany błąd: {0}", exce.Message));
                 return;
             }
 
@@ -58,27 +57,35 @@ namespace AuthCe.UI
             {
                 id = ulong.Parse(CardIdTextBox.Text);
             }
-            catch
+            catch(FormatException)
             {
                 CardIdTextBox.Text = "To powinna być wartość";
                 CardIdTextBox.Background = Brushes.OrangeRed;
                 return;
             }
+            catch (Exception exce)
+            {
+                MessageBox.Show(string.Format("Nieoczekiwany błąd: {0}", exce.Message));
+                return;
+            }
+
             
             try
             {
                 reciver_shop= ((ListBoxItem)ListWithShopsListBox.SelectedValue).Content.ToString();
             }
-            catch
+            catch(ArgumentNullException)
             {
                 MessageBox.Show("Wybierz miejsce zakupów");
+                return;
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show(string.Format("Nieoczekiwany błąd: {0}", exce.Message));
+                return;
             }
 
             currency = CurrencyComboBox.Text;
-
-            //var content = string.Format("Amount: {0} id: {1}, shop: {2}, currency: {3}", amount, id, reciver_shop, currency);
-            //MessageBox.Show(content.ToString());
-
 
             //realizacja zamówienia
             AuthorizationCentre authCe = new AuthorizationCentre();
@@ -89,7 +96,7 @@ namespace AuthCe.UI
             }
             catch(IndexOutOfRangeException exce)
             {
-                MessageBox.Show("Podany numer karty jest nieprawidłowy");
+                MessageBox.Show("Podany numer karty jest nieprawidłowy. {0}", exce.Message);
             }
             catch(Exception exce)
             {
@@ -105,30 +112,38 @@ namespace AuthCe.UI
             string companyName = "";
             string companyType = "";
 
-            try
-            {
+            //walidacja danych
+            if(CompanyNameTextBox.Text.Count()!=0)
                 companyName = CompanyNameTextBox.Text;
-            }
-            catch
+            else
             {
                 CompanyNameTextBox.Text = "Okno jest puste";
                 CompanyNameTextBox.Background = Brushes.Red;
+                return;
             }
+                
 
-            try
-            {
+            if (CompanyTypeComboBox.Text.Count() != 0)
                 companyType = CompanyTypeComboBox.Text;
-            }
-            catch
+            else
             {
-                MessageBox.Show("Proszę wybrać typ firmy");
+                MessageBox.Show("Nie wybrano typu firmy");
+                return;
             }
+                
 
             DbMenagmentProvider db = new DbMenagmentProvider();
-            db.AddCompany(new Company(companyName, companyType));
-
-            List<Company> list = db.ProvideListWithCompanies();
-            CompaniesListBox.ItemsSource = list;
+            try
+            {
+                db.AddCompany(new Company(companyName, companyType));
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show("Nieoczekiwany błąd przy dodawaniu nowej firmy: {0}", exce.Message);
+            }
+            
+            this.UpdateListOfCompanies();
+            
         }
 
         private void RemoveCompany(object sender, RoutedEventArgs e)
@@ -139,19 +154,31 @@ namespace AuthCe.UI
             {
                 companyToRemove = CompaniesListBox.SelectedItem.ToString();
             }
-
-            catch
+            catch(NullReferenceException)
             {
                 MessageBox.Show("Proszę wybrać któraś z firm do usunięcia");
+                return;
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show(string.Format("Nieoczekiwany błąd", exce.Message));
+                return;
             }
 
 
             DbMenagmentProvider db = new DbMenagmentProvider();
-            db.RemoveCompany(companyToRemove);
 
-            //odswiezanie
-            List<Company> list = db.ProvideListWithCompanies();
-            CompaniesListBox.ItemsSource = list;
+            try
+            {
+                db.RemoveCompany(companyToRemove);
+            }
+            catch(FileNotFoundException exce)
+            {
+                MessageBox.Show("Nie można usunąć firmy z listy, ponieważ nie odnaleziono pliku. {0}", exce.Message);
+                return;
+            }
+            
+            UpdateListOfCompanies();
         }
 
 
@@ -160,38 +187,43 @@ namespace AuthCe.UI
         {
             string bank = "";
 
+           
+            if(AddBankTextBox.Text.Count() != 0)
+                bank = AddBankTextBox.Text;
+            else
+            {
+                AddBankTextBox.Text = "Okno jest puste";
+                AddBankTextBox.Background = Brushes.Red;
+                return;
+            }
+                
+           
+            DbMenagmentProvider db = new DbMenagmentProvider();
+
             try
             {
-                bank = AddBankTextBox.Text;
+                db.AddBank(bank);
             }
-            catch
+            catch(Exception exce)
             {
-                MessageBox.Show("Proszę wprowadzić nazwę banku");
+                MessageBox.Show(string.Format("Nie można dodać banku: {0}", exce.Message));
+                return;
             }
 
-            DbMenagmentProvider db = new DbMenagmentProvider();
-            db.AddBank(bank);
-            List<Bank> list = db.ProvideListWithBanks();
-            BanksListBox.ItemsSource = list;
+            UpdateListOfBanks();
 
         }
 
 
         private void AddValueToComboBox_Click(object sender, RoutedEventArgs e)
         {
-
-            DbMenagmentProvider db = new DbMenagmentProvider();
-            List<Company> list = db.ProvideListWithCompanies();
-            CompaniesListBox.ItemsSource = list;
-
+            UpdateListOfCompanies();
         }
 
 
         private void RefreshListBoxWithBanks_Click(object sender, RoutedEventArgs e)
         {
-            DbMenagmentProvider db = new DbMenagmentProvider();
-            List<Bank> list = db.ProvideListWithBanks();
-            BanksListBox.ItemsSource = list;
+            UpdateListOfBanks();
         }
 
         private void RemoveBankButton_Click(object sender, RoutedEventArgs e)
@@ -203,32 +235,30 @@ namespace AuthCe.UI
             {
                 bank = BanksListBox.SelectedItem.ToString();
             }
-            catch
+                
+            catch(NullReferenceException)
             {
                 MessageBox.Show("Wybierz bank do usunięcia");
+                return;
             }
-
-            DbMenagmentProvider db = new DbMenagmentProvider();
-            db.RemoveBank(bank);
-
-            //odswiezania po usunieciu
-            List<Bank> list = db.ProvideListWithBanks();
-            BanksListBox.ItemsSource = list;
-
-        }
-
-        private void TestKalendarz_Click(object sender, RoutedEventArgs e)
-        {
-            if(DayOfTransactionCalendar.SelectedDate.HasValue)
+            catch(Exception exce)
             {
-                MessageBox.Show(DayOfTransactionCalendar.SelectedDate.Value.ToShortDateString());
+                MessageBox.Show(string.Format("Nieoczekiwany błąd podczas usuwania banku", exce.Message));
             }
+           
                 
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            try
+            {
+                DbMenagmentProvider db = new DbMenagmentProvider();
+                db.RemoveBank(bank);
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show("Usunięcie banku z listy nie powiodło się {0}", exce.Message);
+            }
+            
+            UpdateListOfBanks();
+ 
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -246,7 +276,7 @@ namespace AuthCe.UI
             }
             catch (FileNotFoundException exce)
             {
-                MessageBox.Show("Nie odnaleziono na dysku pliku z listą tranzakcji");
+                MessageBox.Show("Nie odnaleziono na dysku pliku z listą tranzakcji. {0}", exce.Message);
                 return;
             }
             catch(Exception exce)
@@ -254,13 +284,6 @@ namespace AuthCe.UI
                 MessageBox.Show(string.Format("Nieoczekiwany błąd: {0}", exce.Message));
                 return;
             }
-
-
-            //MessageBox.Show(string.Format("od {0} do {1}",  Int32.Parse(MinValueFilterTextBox.Text).ToString(), Int32.Parse(MaxValueFilterTextBox.Text).ToString()));
-
-            //MessageBox.Show(newTransactionsList.ToList().Count.ToString());
-
-            //var newTransactionsList = transactionsList.Where(x => x.Amount >= Int32.Parse(MinValueFilterTextBox.Text)).ToList();
 
             foreach (var item in transactionsList)
             {
@@ -276,8 +299,23 @@ namespace AuthCe.UI
             TransactionsListView.Items.Clear();
 
             DbMenagmentProvider db = new DbMenagmentProvider();
-            List<Transaction> transactionsList = db.GetTransactionsList();
+            List<Transaction> transactionsList;
 
+            try
+            {
+                transactionsList = db.GetTransactionsList();
+            }
+            catch(FileNotFoundException exce)
+            {
+                MessageBox.Show(string.Format("Błąd: {0}", exce.Message.ToString()));
+                return;
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show(string.Format("Nieoczekiwany błąd podczas filtrowania listy tranzakcji {0}", exce.Message));
+                return;
+            }
+            
 
             string currencyValue = CurrencyFilterComboBox.Text;
             int fromValue=0, toValue=Int32.MaxValue;
@@ -292,7 +330,7 @@ namespace AuthCe.UI
             {
                 fromValue = Int32.Parse(MinValueFilterTextBox.Text);
             }
-            catch
+            catch(FormatException)
             {
                 fromValue = 0;
             }
@@ -301,12 +339,12 @@ namespace AuthCe.UI
             {
                 toValue = Int32.Parse(MaxValueFilterTextBox.Text);
             }
-            catch
+            catch(FormatException)
             {
                 toValue = Int32.MaxValue;
             }
-            transactionsList = transactionsList.Where(x => x.Amount >= fromValue && x.Amount <= toValue).ToList();
 
+            transactionsList = transactionsList.Where(x => x.Amount >= fromValue && x.Amount <= toValue).ToList();
 
             //obsluga kalendarza
             if (DayOfTransactionCalendar.SelectedDate.HasValue)
@@ -345,9 +383,6 @@ namespace AuthCe.UI
                 transactionsList = transactionsList.Where(x => x.Currency == currency).ToList();
             }
 
-
-            
-            
             foreach (var item in transactionsList)
             {
                 this.TransactionsListView.Items.Add(item);
@@ -365,8 +400,65 @@ namespace AuthCe.UI
             DateFreeChoiceCheckBox.IsChecked = false;
         }
 
-        
+        private void UpdateListOfCompanies()
+        {
+           
+            DbMenagmentProvider db = new DbMenagmentProvider();
 
+            try
+            {
+                List<Company> list = db.ProvideListWithCompanies();
+                CompaniesListBox.ItemsSource = list;
+            }
+            catch (FileNotFoundException exce)
+            {
+                MessageBox.Show("Nie odnaleziono pliku z listą firm. Sprawdź czy plik istnieje. {0}", exce.Message);
+            }
+            catch (Exception exce)
+            {
+                MessageBox.Show("Nieoczekiwany błąd przy aktualizowaniu listy firm. {0}", exce.Message);
+            }
+        }
+
+        private void UpdateListOfBanks()
+        {
+            DbMenagmentProvider db = new DbMenagmentProvider();
+
+            try
+            {
+                List<Bank> list = db.ProvideListWithBanks();
+                BanksListBox.ItemsSource = list;
+            }
+            catch(FileNotFoundException exce)
+            {
+                MessageBox.Show("Nie odnaleziono pliku z listą banków. Sprawdź czy plik istnieje. {0}", exce.Message);
+            }
+            catch(Exception exce)
+            {
+                MessageBox.Show("Nieoczekiwany błąd przy aktualizowaniu listy banów. {0}", exce.Message);
+            }
+            
+        }
+
+        private void RefreshShoppingPlacesButton_Click(object sender, RoutedEventArgs e)
+        {
+            DbMenagmentProvider db = new DbMenagmentProvider();
+
+            try
+            {
+                List<Company> list = db.ProvideListWithCompanies();
+                ListWithShopsListBox.ItemsSource = list;
+            }
+            catch (FileNotFoundException exce)
+            {
+                MessageBox.Show("Nie odnaleziono pliku z listą firm. Sprawdź czy plik istnieje. {0}", exce.Message);
+            }
+            catch (Exception exce)
+            {
+                MessageBox.Show("Nieoczekiwany błąd przy aktualizowaniu listy firm. {0}", exce.Message);
+            }
+
+        }
 
 
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
+using AuthCe.Domain.Exceptions;
 
 namespace AuthCe.Domain.DataAccessLayer
 {
@@ -17,7 +18,7 @@ namespace AuthCe.Domain.DataAccessLayer
             {
                 xml = XDocument.Load("Companies.xml");
             }
-            catch
+            catch(FileNotFoundException)
             {
 
                xml = new XDocument(
@@ -25,7 +26,10 @@ namespace AuthCe.Domain.DataAccessLayer
                     new XElement("ListaFirm", new XAttribute("xmlns",""))
                     );
             }
-
+            catch(Exception)
+            {
+                throw new Exception();
+            }
 
             XElement root = new XElement("Company");
             root.Add(new XElement("Name", company.Name));
@@ -37,13 +41,23 @@ namespace AuthCe.Domain.DataAccessLayer
 
         public void RemoveCompany(string companyName)
         {
-            XDocument xDocument = XDocument.Load("Companies.xml");
-            foreach (var element in xDocument.Descendants("Company")  // Iterates through the collection of "Profile" elements
-                                                    .ToList())               // Copies the list (it's needed because we modify it in the foreach (when the element is removed)
+            XDocument xDocument;
+
+            try
             {
-                if (element.Element("Name").Value == companyName)   // Checks the name of the profile
+                xDocument = XDocument.Load("Companies.xml");
+            }
+            catch(FileNotFoundException)
+            {
+                throw new FileNotFoundException();
+            }
+            
+            foreach (var element in xDocument.Descendants("Company")  
+                                                    .ToList())        
+            {
+                if (element.Element("Name").Value == companyName)   
                 {
-                    element.Remove();                                 // Removes the element
+                    element.Remove();                                 
                 }
             }
             xDocument.Save("Companies.xml");
@@ -53,17 +67,22 @@ namespace AuthCe.Domain.DataAccessLayer
         {
 
             XDocument xml;
+
             try
             {
                 xml = XDocument.Load("Banks.xml");
             }
-            catch
+            catch (FileNotFoundException)
             {
 
                 xml = new XDocument(
                      new XDeclaration("1.0", "utf-8", "yes"),
                      new XElement("BanksList", new XAttribute("xmlns", ""))
                      );
+            }
+            catch(Exception)
+            {
+                throw new Exception();
             }
 
             XElement root = new XElement("Bank");
@@ -73,11 +92,22 @@ namespace AuthCe.Domain.DataAccessLayer
             xml.Save("Banks.xml");
         }
 
+
         public void RemoveBank(string bankName)
         {
-            XDocument xDocument = XDocument.Load("Banks.xml");
-            foreach (var element in xDocument.Descendants("Bank") 
-                                                    .ToList())              
+            XDocument xDocument;
+
+            try
+            {
+                xDocument = XDocument.Load("Banks.xml");
+            }
+            catch(FileNotFoundException)
+            {
+                throw new FileNotFoundException();
+            }
+                
+
+            foreach (var element in xDocument.Descendants("Bank").ToList())              
             {
                 if (element.Element("Name").Value == bankName)   
                 {
@@ -87,9 +117,24 @@ namespace AuthCe.Domain.DataAccessLayer
             xDocument.Save("Banks.xml");
         }
 
+
         public List<Company> ProvideListWithCompanies()
         {
-            XDocument xml = XDocument.Load("Companies.xml");
+            XDocument xml;
+
+            try
+            {
+                xml = XDocument.Load("Companies.xml");
+            }
+            catch (FileNotFoundException)
+            {
+                throw new FileNotFoundException();
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+            
 
             IEnumerable<Company> list = new List<Company>();
 
@@ -102,20 +147,23 @@ namespace AuthCe.Domain.DataAccessLayer
                  };
 
             return list.ToList();
-            
         }
        
         public List<Bank>  ProvideListWithBanks()
         {
-            XDocument xml = new XDocument();
+            XDocument xml;
 
             try
             {
                 xml = XDocument.Load("Banks.xml");
             }
-            catch
+            catch(FileNotFoundException)
             {
-                return new List<Bank>();
+                throw new FileNotFoundException();
+            }
+            catch(Exception)
+            {
+                throw new Exception();
             }
             
 
@@ -139,13 +187,17 @@ namespace AuthCe.Domain.DataAccessLayer
             {
                 xml = XDocument.Load("Transactions.xml");
             }
-            catch
+            catch(FileNotFoundException)
             {
 
                 xml = new XDocument(
                      new XDeclaration("1.0", "utf-8", "yes"),
                      new XElement("TransactionsList", new XAttribute("xmlns", ""))
                      );
+            }
+            catch
+            {
+                throw new Exception();
             }
 
 
@@ -167,8 +219,20 @@ namespace AuthCe.Domain.DataAccessLayer
 
         public List<Card> IssuedCardByBank()
         {
-            XDocument xml = XDocument.Load("IssuedCards.xml");
-
+            XDocument xml;
+            try
+            {
+                xml = XDocument.Load("IssuedCards.xml");
+            }
+            catch(FileNotFoundException)
+            {
+                throw new FileNotFoundException();
+            }
+            catch
+            {
+                throw new Exception();
+            }
+                
             IEnumerable<Card> list = new List<Card>();
 
             list =
@@ -190,9 +254,13 @@ namespace AuthCe.Domain.DataAccessLayer
             {
                 xml = XDocument.Load("Transactions.xml");
             }
-            catch
+            catch(FileNotFoundException)
             {
                 throw new FileNotFoundException();
+            }
+            catch
+            {
+                throw new Exception();
             }
 
 
@@ -212,13 +280,5 @@ namespace AuthCe.Domain.DataAccessLayer
 
             return list.ToList();
         }
-
-
-        //public AuthorizationCentre AuthCentreContentProvider(string shop)
-        //{
-        //    //shop bedzie informowal o tym z jakiego centrum skorzystac przy wyborze jakiego sklepu
-
-        //    throw new NotImplementedException();
-        //}
     }
 }

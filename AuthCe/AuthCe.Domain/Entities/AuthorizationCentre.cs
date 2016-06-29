@@ -2,6 +2,7 @@
 using AuthCe.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,6 @@ namespace AuthCe.Domain
 {
     public class AuthorizationCentre
     {
-        private List<Company> CompaniesUsingThisAuthCentre = new List<Company>();
-        //private List<Bank> BanksCooperatingWithThisAuthCentre = new List<Bank>();
-
         private Bank SelectedBank;
 
         public bool RealizeRequest(double amount, string reciver, string cardid, string currency)
@@ -25,9 +23,13 @@ namespace AuthCe.Domain
                 this.SelectedBank = new Bank(GetNameOfBankWitchRealizesTranzaction(cardid));
                 ifAccepted = SelectedBank.RealizeRequestFromAuthorizationCentre(amount, cardid);
             }
-            catch
+            catch(CardNotFoundException)
             {
                 throw new IndexOutOfRangeException();
+            }
+            catch(Exception)
+            {
+                throw new Exception();
             }
 
             try
@@ -42,20 +44,32 @@ namespace AuthCe.Domain
                     IfAccepted = ifAccepted ? "Accepted" : "Not accepted"
                 });
             }
+
             catch
             {
                 throw new DataBaseSavingException();
-                
             }
 
-            return ifAccepted? true : false;
+            return ifAccepted;
         }
 
         private string GetNameOfBankWitchRealizesTranzaction(string cardid)
         {
             DbMenagmentProvider db = new DbMenagmentProvider();
+            List<Card> list;
 
-            List<Card> list = db.IssuedCardByBank();
+            try
+            {
+                list = db.IssuedCardByBank();
+            }
+            catch(FileNotFoundException)
+            {
+                throw new FileNotFoundException();
+            }
+            catch
+            {
+                throw new Exception();
+            }
 
             var bankName =
                 from element in list
@@ -69,9 +83,9 @@ namespace AuthCe.Domain
             {
                 return bankName.FirstOrDefault().Name;
             }
-            catch
+            catch(NullReferenceException)
             {
-                throw new IndexOutOfRangeException();
+                throw new CardNotFoundException();
             }
         }
 
